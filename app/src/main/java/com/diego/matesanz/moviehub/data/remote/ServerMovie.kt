@@ -1,8 +1,10 @@
-package com.diego.matesanz.moviehub
+package com.diego.matesanz.moviehub.data.remote
 
+import com.diego.matesanz.moviehub.data.Movie
+import com.diego.matesanz.moviehub.data.local.LocalMovie
 import com.google.gson.annotations.SerializedName
 
-data class Movie(
+data class ServerMovie(
     @SerializedName("adult") val adult: Boolean,
     @SerializedName("backdrop_path") val backdropPath: String,
     @SerializedName("genre_ids") val genreIds: List<Int>,
@@ -19,3 +21,19 @@ data class Movie(
     @SerializedName("vote_count") val voteCount: Int,
     val favourite: Boolean = false
 )
+
+fun ServerMovie.toLocalMovie() = LocalMovie(
+        id = 0,
+        title = title,
+        overview = overview,
+        posterPath = posterPath,
+        favourite = favourite
+    )
+
+fun ServerMovie.toMovie() = Movie(
+        id = 0,
+        title = title,
+        overview = overview,
+        posterPath = posterPath,
+        favourite = favourite
+    )
